@@ -1,0 +1,93 @@
+.logoin {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.yuxari {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 150px;
+    margin-bottom: 50px;
+}
+
+.yeke-yazi {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.yeke-yazi h1 {
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.asagi {
+    width: 500px;
+    height: 250px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.int {
+    width: 250px;
+    height: 50px;
+    border-radius: 30px;
+}
+
+.bigodivo img {
+    margin-left: 10px;
+}
+
+.bigodivo {
+    border: 1px solid rgba(238, 238, 238, 1);
+    width: 310px;
+    height: 60px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button button{
+    width: 310px;
+    height: 48px;
+    top: 451px;
+    left: 567px;
+    padding: 12px 26px 12px 26px;
+    gap: 10px;
+    opacity: 0px;
+    color: white;
+    background-color: rgba(94, 206, 123, 1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+.button button:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px 3px rgba(143, 143, 143, 0.7);
+}
+.end{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.acc{
+    font-size: 14px;
+    color: rgba(15, 100, 80, 1);
+}
+.btnrg{
+    font-size: 14px;
+    background-color: white;
+    color: rgba(15, 100, 80, 1);
+    border-bottom: 1px solid rgba(15, 100, 80, 1);
+    cursor: pointer;
+}

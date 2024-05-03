@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.working {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contentTable {
+    width: 100%;
+    height: 90.6vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.left {
+    width: 57%;
+    height: 90.5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.small-icons img {
+    width: 80px;
+}
+
+.small-icons {
+    width: 100px;
+    margin-left: 170px;
+    height: 100%;
+}
+
+.big-img {
+    width: 755px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.big-img img{
+    width: 600px;
+}
+
+.right {
+    width: 35%;
+    height: 90.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sizes {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.size {
+    width: 90px;
+    height: 60px;
+    background-color: white;
+    color: black;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    border: 1px solid black;
+    transition: .2s;
+}
+
+.btnsss {
+    width: 70%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+}
+
+.selected-btn {
+    width: 90px;
+    height: 60px;
+    background-color: black;
+    color: white;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    transition: .2s;
+}
+
+.tittyle {
+    width: 100%;
+    height: 100px;
+    color: black;
+}
+
+.tittyle h1 {
+    font-size: 30px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+}
+
+.colors {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    height: 150px;
+    flex-direction: column;
+}
+
+.cc {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+
+.selected-color-gray {
+    background-color: rgba(211, 210, 213, 1);
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    transition: .2s;
+    box-shadow:
+        0 0 0 2px white,
+        0 0 0 4px rgba(94, 206, 123, 1);
+}
+
+.selected-color-black {
+    background-color: rgba(43, 43, 43, 1);
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    transition: .2s;
+    box-shadow:
+        0 0 0 2px white,
+        0 0 0 4px rgba(94, 206, 123, 1);
+}
+
+.selected-color-green {
+    background-color: rgba(15, 100, 80, 1);
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    transition: .2s;
+    box-shadow:
+        0 0 0 2px white,
+        0 0 0 4px rgba(94, 206, 123, 1);
+}
+
+.gray {
+    background-color: rgba(211, 210, 213, 1);
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    transition: .2s;
+}
+
+.black {
+    background-color: rgba(43, 43, 43, 1);
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    transition: .2s;
+}
+
+.green {
+    background-color: rgba(15, 100, 80, 1);
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    transition: .2s;
+}
+
+.prico {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.addToCart {
+
+    background-color: rgba(94, 206, 123, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btno {
+    background-color: rgba(94, 206, 123, 1);
+    width: 70%;
+    height: 60px;
+    color: white;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.btno:hover {
+    background-color: rgba(94, 190, 123, 0.9); /* Lighten the background color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add box-shadow on hover */
+}
+
+.btno:active {
+    background-color: rgba(94, 190, 123, 0.8); /* Darken the background color on click */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Add a stronger box-shadow on click */
+}
+.desc{
+    width: 65%;
+    height: auto;
+}
+.desc h1{
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+}

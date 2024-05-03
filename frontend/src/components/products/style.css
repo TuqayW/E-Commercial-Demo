@@ -1,0 +1,10 @@
+.Productss{
+    width: 1300px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+}
+.big-Text{}

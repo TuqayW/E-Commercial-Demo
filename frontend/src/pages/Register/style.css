@@ -1,0 +1,13 @@
+.ints{
+    width: 700px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 30px;
+}
+.bigodivo img{
+    width: 20px;
+}
