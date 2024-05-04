@@ -54,7 +54,7 @@ function App() {
           path="/signup"
           element={authUser ? <Navigate to="/" /> : <Register />}
         />
-        <Route path='/product/:id' element={<ProductPage />} />
+        <Route path='/product/:id' element={!authUser ? <Navigate to="/login" /> : <ProductPage />} />
       </Routes>
     </div>
   );

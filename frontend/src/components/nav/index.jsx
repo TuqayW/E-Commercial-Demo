@@ -3,6 +3,7 @@ import "./style.css";
 import centerimg from "../../assets/center.png"
 import dollar from "../../assets/dollar.png"
 import cart from "../../assets/carto.png"
+import { Link } from "react-router-dom"
 
 const Nav = () => {
   const [clicked, setClicked] = useState([true, "btn1"]);
@@ -19,11 +20,15 @@ const Nav = () => {
         <button onClick={() => btnClicked("btn3")} className={clicked[1] === "btn3" ? "selected" : "btn"}>Kids</button>
       </div>
       <div className='divo part-two'>
-        <img src={centerimg} alt="" />
+        <Link to="/">
+          <img src={centerimg} alt="" />
+        </Link>
       </div>
       <div className='divo part-three'>
         <img src={dollar} alt="" />
-        <button className='cart'><img className='cartImg' src={cart} alt="" /></button>
+        <Link to="/cart">
+          <button className='cart'><img className='cartImg' src={cart} alt="" /></button>
+        </Link>
       </div>
     </div>
   );
