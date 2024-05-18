@@ -8,3 +8,4 @@ class User(Base):
     surname=Column(String(256))
     password=Column(String(256))
     email=Column(String(256))
+    ipAddress=Column(String(256))

@@ -10,9 +10,9 @@ import CartPage from './pages/cartPage';
 
 function App() {
   const [ipAddress, setIpAddress] = useState("")
-  const [userName, setUserName] = useState("")
+  const [isLogged, setIsLogged] = useState("")
   let authUser = localStorage.getItem("authUser");
-  let ida = localStorage.getItem("rocLaw");
+  let ida = localStorage.getItem("ipAd");
   useEffect(() => {
     const getIpAddress = async () => {
       try {
@@ -23,38 +23,42 @@ function App() {
         console.error('Error fetching IP address:', error);
       }
     };
-    const getUserById = async () => {
-      const response = await fetch(`http://127.0.0.1:8000/getUserById/${ida}`);
-      const data = await response.json();
-      setUserName(data)
+    const getUser = async () => {
+      if (ida === "" || authUser == "") {
+        localStorage.removeItem("authUser")
+        localStorage.removeItem("rocLaw")
+        return 0;
+      }
+      else {
+        const response = await fetch(`http://127.0.0.1:8000/verify-token/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ authUser, ida }),
+        });
+        const data = await response.json();
+        setIsLogged(data.valid)
+      }
     };
-    getUserById()
+    getUser()
 
-    getIpAddress()
-    const hashedValue = sha256(`${userName}${ipAddress}`);
-    localStorage.getItem('authUser');
-    if (hashedValue === authUser) {
-      authUser = true;
-    }
-    else {
-      authUser = false;
-    }
-  },[])
+  }, [])
   return (
     <div className="kola">
       <Routes>
-        <Route path="/" element={!authUser ? <Navigate to="/login" /> : <Main />} />
-        <Route path="/products" element={!authUser ? <Navigate to="/login" /> : <Products />} />
+        <Route path="/" element={!isLogged ? <Navigate to="/login" /> : <Main />} />
+        <Route path="/products" element={!isLogged ? <Navigate to="/login" /> : <Products />} />
         <Route
           path="/login"
-          element={authUser ? <Navigate to="/" /> : <Login />}
+          element={isLogged ? <Navigate to="/" /> : <Login />}
         />
-        <Route path="/cart" element={!authUser ? <Navigate to="/login" /> : <CartPage />} />
+        <Route path="/cart" element={!isLogged ? <Navigate to="/login" /> : <CartPage />} />
         <Route
           path="/signup"
-          element={authUser ? <Navigate to="/" /> : <Register />}
+          element={isLogged ? <Navigate to="/" /> : <Register />}
         />
-        <Route path='/product/:id' element={!authUser ? <Navigate to="/login" /> : <ProductPage />} />
+        <Route path='/product/:id' element={!isLogged ? <Navigate to="/login" /> : <ProductPage />} />
       </Routes>
     </div>
   );

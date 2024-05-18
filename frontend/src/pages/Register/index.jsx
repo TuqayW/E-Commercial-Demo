@@ -4,6 +4,8 @@ import emailLogo from "../../assets/email.png";
 import passwordLogo from "../../assets/password.png";
 import { Link } from 'react-router-dom';
 import humanLogo from "../../assets/human.png"
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import sha256 from "js-sha256"
 
 const Login = () => {
@@ -25,13 +27,27 @@ const Login = () => {
   };
 
   const clickHandle = async () => {
+    if (email === "" || password == "" || name == "" || surname == "") {
+      toast.error('Fill all of the forums!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return 0;
+    }
     try {
+      getIpAddress()
       const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, surname, password, email }),
+        body: JSON.stringify({ name, surname, password, email, ipAddress }),
       });
 
       if (!response.ok) {
@@ -39,19 +55,18 @@ const Login = () => {
       }
 
       const data = await response.json();
-      getIpAddress()
-      const hashedValue = sha256(`${email}${ipAddress}`);
-      localStorage.setItem('authUser', hashedValue);
-      console.log(response)
-      localStorage.setItem("rocLaw", data.id)
-      window.location.reload();
       console.log('Registration successful:', data);
+      localStorage.setItem('authUser',data.access_token);
+      localStorage.setItem("ipAd",ipAddress);
+      <Link to="/"></Link>
+      window.location.reload();
     } catch (error) {
       console.error('Fetch error:', error);
     }
   };
   return (
     <div className='logoin'>
+      <ToastContainer />
       <div className="yuxari">
         <div className="yeke-yazi">
           <h1>Hello Again!</h1>

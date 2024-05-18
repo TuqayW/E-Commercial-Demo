@@ -1,17 +1,23 @@
 from pydantic import BaseModel
 
-class UserCreate(BaseModel):
-    name:str
-    surname:str
-    password:str
-    email:str
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
 class User(BaseModel):
-    id:int
-    name:str
-    surname:str
-    password:str 
-    email:str
+    id: int
+    name: str
+    surname: str
+    email: str
+    password: str
+    ipAddress: str
 
     class Config:
-        from_attributes=True
+        orm_mode = True
+
+class UserCreate(BaseModel):
+    name: str
+    surname: str
+    email: str
+    password: str
+    ipAddress: str

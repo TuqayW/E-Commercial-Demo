@@ -56,13 +56,10 @@ const Login = () => {
         }
 
         const data = await response.json();
-        getIpAddress()
-        const hashedValue = sha256(`${email}${ipAddress}`);
-        localStorage.setItem('authUser', hashedValue);
-        console.log(response)
-        localStorage.setItem("rocLaw",data.id) 
-        window.location.reload(); 
-        console.log('Login successful:', data);
+        localStorage.setItem("authUser",data.access_token)
+        localStorage.setItem("ipAd",data.ipoo)
+        console.log(data)
+        // window.location.reload(); 
       } catch (error) {
         console.error('Fetch error:', error);
         toast.error('Email or password is wrong!', {
