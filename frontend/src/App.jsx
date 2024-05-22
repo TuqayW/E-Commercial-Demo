@@ -24,7 +24,7 @@ function App() {
       }
     };
     const getUser = async () => {
-      if (ida === "" || authUser == "") {
+      if (false) {
         localStorage.removeItem("authUser")
         localStorage.removeItem("rocLaw")
         return 0;
@@ -35,9 +35,10 @@ function App() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ authUser, ida }),
+          body: JSON.stringify({ "token":authUser, "ipAddress":ida }),
         });
         const data = await response.json();
+        console.log(data)
         setIsLogged(data.valid)
       }
     };

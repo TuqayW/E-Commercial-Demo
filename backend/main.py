@@ -2,13 +2,13 @@ from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from fastapi import FastAPI, Depends, HTTPException, status, Body, Query
 from fastapi.middleware.cors import CORSMiddleware
-import schemas, models
 from typing import List
 from sqlalchemy.orm import Session
 from database import Base, SessionLocal, engine
+import schemas, models
 
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 1
 
 Base.metadata.create_all(engine)
 
@@ -23,7 +23,7 @@ app = FastAPI(docs_url="/docs")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
@@ -68,7 +68,7 @@ def add_student(new_person: schemas.UserCreate, session: Session = Depends(get_s
         user.ipAddress, data={"sub": user.email}, expires_delta=access_token_expires
     )
     
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer","ipAddress":user.ipAddress}
 
 @app.get("/getAllUsers", response_model=List[schemas.User])
 def getAllUsers(session: Session = Depends(get_session)):
@@ -109,12 +109,17 @@ def login(email: str = Body(..., embed=True), password: str = Body(..., embed=Tr
     access_token = create_access_token(
         user.ipAddress, data={"sub": user.email}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer","ipoo":user.ipAddress}
+    return {"access_token": access_token, "token_type": "bearer","ipAddress":user.ipAddress}
 
 @app.get("/verify-token")
-def verify_token(token: str = Query(...), ipAddress: str = Query(...)):
+@app.post("/verify-token")
+def verify_token(token: str = Body(..., embed=True), ipAddress: str = Body(..., embed=True)):
     try:
         payload = jwt.decode(token, ipAddress, algorithms=[ALGORITHM])
+        exp = payload.get("exp")
+        print("Token expiration time:", datetime.utcfromtimestamp(exp))
+        print("Current time:", datetime.utcnow())
         return {"valid": True}
-    except JWTError:
+    except JWTError as e:
+        print("JWT Error:", e)
         return {"valid": False}

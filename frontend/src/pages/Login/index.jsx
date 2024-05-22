@@ -56,10 +56,11 @@ const Login = () => {
         }
 
         const data = await response.json();
-        localStorage.setItem("authUser",data.access_token)
-        localStorage.setItem("ipAd",data.ipoo)
         console.log(data)
-        // window.location.reload(); 
+        localStorage.setItem("ipAd",data.ipAddress)
+        localStorage.setItem("authUser",data.access_token);
+        <Link to="/"></Link>
+        window.location.reload(); 
       } catch (error) {
         console.error('Fetch error:', error);
         toast.error('Email or password is wrong!', {

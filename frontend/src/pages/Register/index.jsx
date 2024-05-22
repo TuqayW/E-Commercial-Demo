@@ -1,34 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./style.css";
 import emailLogo from "../../assets/email.png";
 import passwordLogo from "../../assets/password.png";
 import { Link } from 'react-router-dom';
-import humanLogo from "../../assets/human.png"
+import humanLogo from "../../assets/human.png";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import sha256 from "js-sha256"
+import sha256 from "js-sha256";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [surname, setSurname] = useState("")
+  const [surname, setSurname] = useState("");
   const [ipAddress, setIpAddress] = useState('');
 
   const getIpAddress = async () => {
     try {
       const response = await fetch('https://api.ipify.org/?format=json');
       const data = await response.json();
-      setIpAddress(data.ip);
+      return data.ip;
     } catch (error) {
       console.error('Error fetching IP address:', error);
-      showToast('Error fetching IP address');
-    }
-  };
-
-  const clickHandle = async () => {
-    if (email === "" || password == "" || name == "" || surname == "") {
-      toast.error('Fill all of the forums!', {
+      toast.error('Error fetching IP address', {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: true,
@@ -38,16 +32,34 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      return 0;
+      return '';
+    }
+  };
+
+  const clickHandle = async () => {
+    if (email === "" || password === "" || name === "" || surname === "") {
+      toast.error('Fill all of the forms!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
     }
     try {
-      getIpAddress()
+      const ip = await getIpAddress();
+      setIpAddress(ip);
+
       const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, surname, password, email, ipAddress }),
+        body: JSON.stringify({ name, surname, password, email, ipAddress: ip}),
       });
 
       if (!response.ok) {
@@ -55,15 +67,16 @@ const Login = () => {
       }
 
       const data = await response.json();
+      localStorage.setItem("ipAd", ip);
+      localStorage.setItem('authUser', data.access_token);
       console.log('Registration successful:', data);
-      localStorage.setItem('authUser',data.access_token);
-      localStorage.setItem("ipAd",ipAddress);
       <Link to="/"></Link>
       window.location.reload();
     } catch (error) {
       console.error('Fetch error:', error);
     }
   };
+
   return (
     <div className='logoin'>
       <ToastContainer />
@@ -133,4 +146,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
