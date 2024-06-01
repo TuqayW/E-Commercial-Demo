@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./style.css";
-import centerimg from "../../assets/center.png"
-import dollar from "../../assets/dollar.png"
-import cart from "../../assets/carto.png"
-import { Link } from "react-router-dom"
+import centerimg from "../../assets/center.png";
+import dollar from "../../assets/dollar.png";
+import cart from "../../assets/carto.png";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [clicked, setClicked] = useState([true, "btn1"]);
+  const [isSeller, setIsSeller] = useState(false);
+
+  useEffect(() => {
+    const loglevele = localStorage.getItem('loglevele');
+    if (loglevele === 'seller') {
+      setIsSeller(true);
+    }
+  }, []);
 
   const btnClicked = (a) => {
     setClicked([true, `${a}`]);
   };
-
+  const clickHandle=()=>{
+    <Link to="/add-item"></Link>
+  }
   return (
     <div className='all'>
       <div className='divo part-one'>
@@ -29,6 +39,9 @@ const Nav = () => {
         <Link to="/cart">
           <button className='cart'><img className='cartImg' src={cart} alt="" /></button>
         </Link>
+      </div>
+      <div className="add-item">
+        {isSeller && <button onClick={clickHandle} className='add-item-button'>Add Item</button>}
       </div>
     </div>
   );

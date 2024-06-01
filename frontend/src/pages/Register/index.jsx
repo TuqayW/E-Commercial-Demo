@@ -14,7 +14,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [ipAddress, setIpAddress] = useState('');
-
+  const [role,setRole]=useState("")
   const getIpAddress = async () => {
     try {
       const response = await fetch('https://api.ipify.org/?format=json');
@@ -53,13 +53,13 @@ const Register = () => {
     try {
       const ip = await getIpAddress();
       setIpAddress(ip);
-
+      localStorage.setItem("loglevele",role)
       const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, surname, password, email, ipAddress: ip}),
+        body: JSON.stringify({ name, surname, password, email, ipAddress: ip ,role:role}),
       });
 
       if (!response.ok) {
@@ -129,6 +129,12 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+          </div>
+          <div className="intq">
+            <select onChange={(e) => setRole(e.target.value)} className="selectione int" name="roles" id="roles">
+              <option className='optione' value="buyer">Buyer</option>
+              <option className='optione' value="seller">Seller</option>
+            </select>
           </div>
         </div>
 

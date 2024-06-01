@@ -9,3 +9,4 @@ class User(Base):
     password=Column(String(256))
     email=Column(String(256))
     ipAddress=Column(String(256))
+    role=Column(String(256))

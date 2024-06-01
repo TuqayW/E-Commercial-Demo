@@ -57,6 +57,7 @@ const Login = () => {
 
         const data = await response.json();
         console.log(data)
+        localStorage.setItem("loglevele",data.role)
         localStorage.setItem("ipAd",data.ipAddress)
         localStorage.setItem("authUser",data.access_token);
         <Link to="/"></Link>

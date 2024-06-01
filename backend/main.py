@@ -57,7 +57,8 @@ def add_student(new_person: schemas.UserCreate, session: Session = Depends(get_s
         surname=new_person.surname,
         email=new_person.email,
         password=encoded_jwt,
-        ipAddress=new_person.ipAddress
+        ipAddress=new_person.ipAddress,
+        role=new_person.role
     )
     session.add(user)
     session.commit()
@@ -68,7 +69,7 @@ def add_student(new_person: schemas.UserCreate, session: Session = Depends(get_s
         user.ipAddress, data={"sub": user.email}, expires_delta=access_token_expires
     )
     
-    return {"access_token": access_token, "token_type": "bearer","ipAddress":user.ipAddress}
+    return {"access_token": access_token, "token_type": "bearer","ipAddress":user.ipAddress,"role":user.role}
 
 @app.get("/getAllUsers", response_model=List[schemas.User])
 def getAllUsers(session: Session = Depends(get_session)):
@@ -109,7 +110,7 @@ def login(email: str = Body(..., embed=True), password: str = Body(..., embed=Tr
     access_token = create_access_token(
         user.ipAddress, data={"sub": user.email}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer","ipAddress":user.ipAddress}
+    return {"access_token": access_token, "token_type": "bearer","ipAddress":user.ipAddress,"role":user.role}
 
 @app.get("/verify-token")
 @app.post("/verify-token")
