@@ -65,7 +65,7 @@ const Register = () => {
       if (!response.ok) {
         throw new Error('Failed to register user');
       }
-
+      localStorage.setItem("email",email)
       const data = await response.json();
       localStorage.setItem("ipAd", ip);
       localStorage.setItem('authUser', data.access_token);

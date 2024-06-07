@@ -10,3 +10,11 @@ class User(Base):
     email=Column(String(256))
     ipAddress=Column(String(256))
     role=Column(String(256))
+
+class Product(Base):
+    __tablename__ = "Products"
+    id=Column(Integer,primary_key=True)
+    imageurl=Column(String(256))
+    title=Column(String(256))
+    description=Column(String(256))
+    price=Column(String(256))

@@ -4,11 +4,11 @@ import "./style.css"
 
 const Products = () => {
   const [infos, setInfos] = useState([]);
-
+  const [inffos,setInffos]=useState([])
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(json => setInfos(json));
+    fetch("http://127.0.0.1:8000/getAllProducts")
+      .then(res=>res.json())
+      .then(json=> setInffos(json))
   }, []);
   return (
     <>
@@ -17,8 +17,8 @@ const Products = () => {
       </div>
       <div className='Productss'>
         {
-          infos?.map(info => (
-            <Product key={info.id} id={info.id} title={info.title} price={info.price} imgurl={info.image} />
+          inffos?.map(info => (
+            <Product key={info.id} id={info.id} title={info.title} price={info.price} imgurl={info.imageurl} />
           ))
         }
       </div>

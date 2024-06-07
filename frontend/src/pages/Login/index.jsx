@@ -54,7 +54,7 @@ const Login = () => {
         if (!response.ok) {
           throw new Error('Failed to login user');
         }
-
+        localStorage.setItem("email",email)
         const data = await response.json();
         console.log(data)
         localStorage.setItem("loglevele",data.role)

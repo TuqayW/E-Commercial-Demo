@@ -8,7 +8,7 @@ from database import Base, SessionLocal, engine
 import schemas, models
 
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 1
+ACCESS_TOKEN_EXPIRE_MINUTES = 5
 
 Base.metadata.create_all(engine)
 
@@ -124,3 +124,36 @@ def verify_token(token: str = Body(..., embed=True), ipAddress: str = Body(..., 
     except JWTError as e:
         print("JWT Error:", e)
         return {"valid": False}
+
+@app.post("/add-item")
+@app.get("/add-item")
+def add_item(new_product:schemas.ProductCreate,session:Session=Depends(get_session)):
+    product=models.Product(
+        imageurl=new_product.imageurl,
+        title=new_product.title,
+        description=new_product.description,
+        price=new_product.price
+    )
+    session.add(product)
+    session.commit()
+    session.refresh(product)
+    return {"id":product.id,"imageurl":product.imageurl,"title":product.title,"description":product.description,"price":product.price}
+
+@app.delete("/deleteProduct/{id}")
+def deleteUserById(id: int, session: Session = Depends(get_session)):
+    user = session.query(models.Product).get(id)
+    if not user:
+        raise HTTPException(status_code=404, detail="Product not found")
+    session.delete(user)
+    session.commit()
+    return {"message": "Product deleted successfully"}
+@app.get("/getAllProducts", response_model=List[schemas.Product])
+def getAllProducts(session: Session = Depends(get_session)):
+    users = session.query(models.Product).all()
+    return users
+@app.get("/getProductById/{id}")
+def getProductById(id: int, session: Session = Depends(get_session)):
+    product = session.query(models.Product).get(id)
+    if not product:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"id":product.id,"imageurl":product.imageurl,"title":product.title,"description":product.description,"price":product.price}

@@ -28,7 +28,7 @@ const ProductPage = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`https://fakestoreapi.com/products/${id}`)
+        fetch(`http://127.0.0.1:8000/getProductById/${id}`)
             .then(res => res.json())
             .then(json => {
                 setSitem(json);
@@ -45,12 +45,12 @@ const ProductPage = () => {
                 <div className='contentTable'>
                     <div className="left">
                         <div className="small-icons">
-                            <img src={sitem.image} alt="" />
-                            <img src={sitem.image} alt="" />
-                            <img src={sitem.image} alt="" />
+                            <img src={sitem.imageurl} alt="" />
+                            <img src={sitem.imageurl} alt="" />
+                            <img src={sitem.imageurl} alt="" />
                         </div>
                         <div className="big-img">
-                            <img src={sitem.image} alt="" />
+                            <img src={sitem.imageurl} alt="" />
                         </div>
                     </div>
                     <div className="right">

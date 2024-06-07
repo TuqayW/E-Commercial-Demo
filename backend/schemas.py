@@ -24,3 +24,15 @@ class UserCreate(BaseModel):
     password: str
     ipAddress: str
     role: str
+
+class Product(BaseModel):
+    id:int
+    imageurl:str
+    title:str
+    description:str
+    price:str
+class ProductCreate(BaseModel):
+    imageurl:str
+    title:str
+    description:str
+    price:str

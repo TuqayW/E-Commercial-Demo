@@ -3,11 +3,12 @@ import "./style.css";
 import centerimg from "../../assets/center.png";
 import dollar from "../../assets/dollar.png";
 import cart from "../../assets/carto.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const [clicked, setClicked] = useState([true, "btn1"]);
   const [isSeller, setIsSeller] = useState(false);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const loglevele = localStorage.getItem('loglevele');
@@ -20,7 +21,7 @@ const Nav = () => {
     setClicked([true, `${a}`]);
   };
   const clickHandle=()=>{
-    <Link to="/add-item"></Link>
+    navigate("/add-item");
   }
   return (
     <div className='all'>
