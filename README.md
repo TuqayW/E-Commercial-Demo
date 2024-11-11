@@ -2,9 +2,9 @@ To run the project open 2 terminals
 
 FIRST TERMINAL
 
-*python -m uvicorn main:app --reload*
+    *python -m uvicorn main:app --reload*
 
 SECOND TERMINAL
 
-*npm i*
-*npm run dev*
+    *npm i*
+    *npm run dev*
